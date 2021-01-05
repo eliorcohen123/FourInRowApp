@@ -1,0 +1,106 @@
+package com.example.fourinrowapp.PagesPackage;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fourinrowapp.R;
+import com.example.fourinrowapp.UtilsPackage.EmailPasswordValidator;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView tvRegister;
+    private EditText etEmail, etPassword;
+    private Button btnLogin;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private static final String TAG = "check1";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        initUI();
+        initListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    private void initUI() {
+        tvRegister = findViewById(R.id.tvRegister);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = firebaseAuth -> {
+            if (firebaseAuth.getCurrentUser() != null) {
+                startActivity(new Intent(LoginActivity.this, MainMenu.class));
+                finish();
+            }
+        };
+    }
+
+    private void initListeners() {
+        tvRegister.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+    }
+
+    private void login() {
+        String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+        if (!EmailPasswordValidator.getInstance().isValidEmail(email) && !EmailPasswordValidator.getInstance().isValidPassword(password)) {
+            etEmail.setError("The email is invalid");
+            etPassword.setError("The password is invalid");
+            etEmail.requestFocus();
+            etPassword.requestFocus();
+        } else if (!EmailPasswordValidator.getInstance().isValidEmail(email)) {
+            etEmail.setError("The email is invalid");
+            etEmail.requestFocus();
+        } else if (!EmailPasswordValidator.getInstance().isValidPassword(password)) {
+            etPassword.setError("The password is invalid");
+            etPassword.requestFocus();
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(LoginActivity.this, task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithEmail:success");
+                            startActivity(new Intent(LoginActivity.this, MainMenu.class));
+                            finish();
+                        } else {
+                            Log.d(TAG, "singInWithEmail:Fail");
+                            Toast.makeText(LoginActivity.this, "The login failed", Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tvRegister:
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnLogin:
+                login();
+                break;
+        }
+    }
+
+}

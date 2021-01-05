@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "284285849096",
+    "project_id": "fourinrowapp-7434a",
+    "storage_bucket": "fourinrowapp-7434a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284285849096:android:76267aad2be2eeb1db4bbd",
+        "android_client_info": {
+          "package_name": "com.example.fourinrowapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284285849096-ce1keda5uopfrhmjka3bu22hssi0j6vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_3ZXmdpjcijh7KvK3OB9pf-97OOiLZM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284285849096-ce1keda5uopfrhmjka3bu22hssi0j6vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

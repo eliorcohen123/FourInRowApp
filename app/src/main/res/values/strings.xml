@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FourInRowApp</string>
+    <string name="menu">MAIN MENU</string>
+    <string name="play">PLAY GAME</string>
+    <string name="scores">SCORES</string>
+    <string name="sign_out">SIGN OUT</string>
+</resources>
