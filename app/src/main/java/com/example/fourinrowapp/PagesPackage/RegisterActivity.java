@@ -64,11 +64,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(RegisterActivity.this, task -> {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "createUserWithEmail:success");
-                            startActivity(new Intent(RegisterActivity.this, MainMenu.class));
+                            Log.i(TAG, "createUserWithEmail:success");
+                            startActivity(new Intent(RegisterActivity.this, MainMenuActivity.class));
                             finish();
                         } else {
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.e(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegisterActivity.this, "The register failed", Toast.LENGTH_SHORT).show();
                         }
                     });

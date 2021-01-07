@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fourinrowapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
     private ListView menuList;
     private FirebaseAuth mAuth;
@@ -44,12 +44,12 @@ public class MainMenu extends AppCompatActivity {
             TextView textview = (TextView) itemClicked;
             String strText = textview.getText().toString();
             if (strText.equalsIgnoreCase(getResources().getString(R.string.play))) {
-                startActivity(new Intent(MainMenu.this, GameStart.class));
+                startActivity(new Intent(MainMenuActivity.this, GameStartActivity.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(R.string.scores))) {
-                startActivity(new Intent(MainMenu.this, ScoresActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, ScoresActivity.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(R.string.sign_out))) {
                 mAuth.signOut();
-                startActivity(new Intent(MainMenu.this, LoginActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, LoginActivity.class));
                 finish();
             }
         });

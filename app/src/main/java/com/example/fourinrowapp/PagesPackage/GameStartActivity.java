@@ -18,7 +18,7 @@ import com.example.fourinrowapp.UtilsPackage.GameMain;
 import com.example.fourinrowapp.R;
 import com.example.fourinrowapp.DataPackage.TypeDBHelper;
 
-public class GameStart extends AppCompatActivity {
+public class GameStartActivity extends AppCompatActivity {
 
     private static final Paint background = new Paint();
     private static final Paint linesColor = new Paint();
@@ -47,8 +47,8 @@ public class GameStart extends AppCompatActivity {
 
         protected void onDraw(Canvas canvas) {
             int i, j, k;
-            background.setColor(ContextCompat.getColor(GameStart.this, R.color.background));
-            linesColor.setColor(ContextCompat.getColor(GameStart.this, R.color.text_color));
+            background.setColor(ContextCompat.getColor(GameStartActivity.this, R.color.background));
+            linesColor.setColor(ContextCompat.getColor(GameStartActivity.this, R.color.text_color));
 
             canvas.drawRect(0, 0, getWidth(), getHeight(), background);
             width = getWidth() / 7f;
@@ -89,12 +89,12 @@ public class GameStart extends AppCompatActivity {
                             }
                             canvas.drawText(game.board[i][j], j * width + x1, i * height + y1, foreground);
                         } else {
-                            foreground.setColor(ContextCompat.getColor(GameStart.this, R.color.text_color));
+                            foreground.setColor(ContextCompat.getColor(GameStartActivity.this, R.color.text_color));
                             canvas.drawText(game.board[i][j], j * width + x1, i * height + y1, foreground);
                         }
                         if (count2 == 4) {
                             for (k = 0; k < 4; k++) {
-                                foreground.setColor(ContextCompat.getColor(GameStart.this, R.color.colourWin));
+                                foreground.setColor(ContextCompat.getColor(GameStartActivity.this, R.color.colourWin));
                                 canvas.drawText(game.board[game.pos[k][0]][game.pos[k][1]], game.pos[k][1] * width + x1, game.pos[k][0] * height + y1, foreground);
                             }
 
