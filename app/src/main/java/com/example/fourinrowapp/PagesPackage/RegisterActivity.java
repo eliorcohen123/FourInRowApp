@@ -15,45 +15,55 @@ import com.example.fourinrowapp.R;
 import com.example.fourinrowapp.UtilsPackage.EmailPasswordValidator;
 import com.google.firebase.auth.FirebaseAuth;
 
+// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// View.OnClickListener - Give you access to use the function - onClick() - Order the clicks on elements
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvLogin;
     private EditText etEmail, etPassword;
     private Button btnRegister;
+    // Set FirebaseAuth - The authentication of Firebase
     private FirebaseAuth mAuth;
-    private static final String TAG = "check1";
+    private static final String TAG = "check1"; // String for the check in Logcat
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register); // Give you to see the design of your Activity, Give you access to use the ids of the elements
 
         initUI();
         initListeners();
     }
 
     private void initUI() {
+        // Initialize id to the element
         tvLogin = findViewById(R.id.tvLogin);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegister);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // Initialize FirebaseAuth
     }
 
     private void initListeners() {
+        // Give access of clickable to the elements are need to be clicked
         tvLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
     }
 
     private void register() {
+        // Get the texts are written in the EditText
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
+        // Check if the email and the password are invalid
         if (!EmailPasswordValidator.getInstance().isValidEmail(email) && !EmailPasswordValidator.getInstance().isValidPassword(password)) {
+            // Pop error on the EditText
             etEmail.setError("The email is invalid");
             etPassword.setError("The password is invalid");
+            // Navigate to the EditText with the error
             etEmail.requestFocus();
             etPassword.requestFocus();
+            // Check if the email is invalid
         } else if (!EmailPasswordValidator.getInstance().isValidEmail(email)) {
             etEmail.setError("The email is invalid");
             etEmail.requestFocus();

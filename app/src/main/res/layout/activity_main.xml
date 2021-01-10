@@ -21,11 +21,9 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentTop="false"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="120dp"
-                android:shadowColor="@color/menu_glow"
+                android:shadowColor="@color/white"
                 android:shadowDx="3"
                 android:shadowDy="3"
                 android:shadowRadius="10"
@@ -35,13 +33,11 @@
                 android:textSize="130sp" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView1"
-                android:layout_alignParentStart="false"
                 android:layout_centerHorizontal="true"
-                android:shadowColor="@color/title_glow"
+                android:shadowColor="@color/white"
                 android:shadowDx="3"
                 android:shadowDy="3"
                 android:shadowRadius="5"
