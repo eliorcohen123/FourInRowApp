@@ -13,48 +13,51 @@ import com.example.fourinrowapp.DataPackage.TypeDBHelper;
 
 import java.util.ArrayList;
 
+// AppCompatActivity - Give you access to use the LifeCycle of Activity.
 public class ScoresActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView; // Set RecyclerView - contains list of items
     private final ArrayList<String> resultsArrayList = new ArrayList<>();
-    private AdapterType adapterType;
-    private TypeDBHelper typeDBHelper;
+    private AdapterType adapterType; // Set AdapterType
+    private TypeDBHelper typeDBHelper; // Set TypeDBHelper - SQLiteDBOpenHelper
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scores);
+        setContentView(R.layout.activity_scores); // Give you to see the design of your Activity, Give you access to use the ids of the elements
 
         initUI();
         getData();
     }
 
     private void initUI() {
+        // Initialize id to the element
         recyclerView = findViewById(R.id.recyclerView);
 
-        typeDBHelper = new TypeDBHelper(this);
+        typeDBHelper = new TypeDBHelper(this); // Initialize TypeDBHelper - SQLiteDBOpenHelper
 
-        adapterType = new AdapterType(resultsArrayList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapterType);
+        adapterType = new AdapterType(resultsArrayList); // Initialize AdapterType - adapts the design to each item in the RecyclerView and receives data
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Set the layout of the contents
+        recyclerView.setAdapter(adapterType); // Set the adapter in the RecyclerView
     }
 
     private void getData() {
+        // Conduct tasks
         new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Void doInBackground(Void... params) {
-                resultsArrayList.clear();
-                resultsArrayList.addAll(typeDBHelper.getAllTypes());
+            protected Void doInBackground(Void... params) { // Perform tasks in background
+                resultsArrayList.clear(); // Clear the ArrayList that contains the data of the RecyclerView
+                resultsArrayList.addAll(typeDBHelper.getAllTypes()); // Add all the data from TypeDBHelper - SQLiteDBOpenHelper, to the ArrayList that data of the RecyclerView
                 return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
+            protected void onPostExecute(Void aVoid) { // After "doInBackground" finish to executes the tasks the "onPostExecute" called
                 super.onPostExecute(aVoid);
 
-                adapterType.notifyDataSetChanged();
+                adapterType.notifyDataSetChanged(); // Update the data in the RecyclerView
             }
-        }.execute();
+        }.execute(); // Run AsyncTask
     }
 
 }

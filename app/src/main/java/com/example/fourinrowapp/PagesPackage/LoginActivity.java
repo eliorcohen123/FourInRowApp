@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // Set FirebaseAuth - The authentication of Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG = "check1"; // String for the check in Logcat
+    private static final String TAG = "check1"; // String for the check in "Logcat"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
@@ -100,11 +100,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // If we get ok to connect to Firebase authentication, we'll move from LoginActivity to MainMenuActivity
                         if (task.isSuccessful()) {
                             Log.i(TAG, "signInWithEmail:success");
+
                             startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
                             finish();
                             // If we not get ok to connect to Firebase authentication, we'll pop Toast
                         } else {
                             Log.e(TAG, "singInWithEmail:Fail");
+
                             Toast.makeText(LoginActivity.this, "The login failed", Toast.LENGTH_LONG).show();
                         }
                     });

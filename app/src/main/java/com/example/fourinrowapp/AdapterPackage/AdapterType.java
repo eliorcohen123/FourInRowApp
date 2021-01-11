@@ -3,7 +3,6 @@ package com.example.fourinrowapp.AdapterPackage;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,37 +11,28 @@ import com.example.fourinrowapp.R;
 
 import java.util.List;
 
-public class AdapterType extends RecyclerView.Adapter<AdapterType.CustomViewHolder> {
+// A class that extends ViewHolder that will be used by the adapter
+public class AdapterType extends RecyclerView.Adapter<ViewHolderAdapterType> {
 
-    private List<String> dataList;
+    private List<String> dataList; // List of Strings
 
     public AdapterType(List<String> dataList) {
         this.dataList = dataList;
     }
 
-    static class CustomViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView win, lose;
-
-        CustomViewHolder(View itemView) {
-            super(itemView);
-
-            win = itemView.findViewById(R.id.win);
-            lose = itemView.findViewById(R.id.lose);
-        }
-    }
-
+    // Give you to see the design of your Adapter, Give you access to use the ids of the elements
     @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderAdapterType onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.adapter_type, parent, false);
-        return new CustomViewHolder(view);
+        return new ViewHolderAdapterType(view);
     }
 
+    // Display the data at the specified position
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
-        String current = dataList.get(position);
+    public void onBindViewHolder(ViewHolderAdapterType holder, final int position) {
+        String current = dataList.get(position); // Put the data by the position
         holder.win.setText(current);
         if (current.equals("X")) {
             holder.lose.setText("O");
@@ -51,6 +41,7 @@ public class AdapterType extends RecyclerView.Adapter<AdapterType.CustomViewHold
         }
     }
 
+    // Get the size of the items in the RecyclerView
     @Override
     public int getItemCount() {
         return dataList.size();

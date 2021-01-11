@@ -22,14 +22,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView tvLogin;
     private EditText etEmail, etPassword;
     private Button btnRegister;
-    // Set FirebaseAuth - The authentication of Firebase
-    private FirebaseAuth mAuth;
-    private static final String TAG = "check1"; // String for the check in Logcat
+    private FirebaseAuth mAuth; // Set FirebaseAuth - The authentication of Firebase
+    private static final String TAG = "check1"; // String for the check in "Logcat"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register); // Give you to see the design of your Activity, Give you access to use the ids of the elements
+        setContentView(R.layout.activity_register); // Give you to see the design of your Activity, give you access to use the ids of the elements
 
         initUI();
         initListeners();
@@ -68,28 +67,38 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             etEmail.setError("The email is invalid");
             etEmail.requestFocus();
         } else if (!EmailPasswordValidator.getInstance().isValidPassword(password)) {
+            // Pop error on the EditText
             etPassword.setError("The password is invalid");
+            // Check if the password is invalid
             etPassword.requestFocus();
+            // If the email and password are valid we are get in to the executes in the else
         } else {
+            // We are put in the email and password into the method signInWithEmailAndPassword()
             mAuth.createUserWithEmailAndPassword(email, password)
+                    // After trying to connect to Firebase authentication, we check the following
                     .addOnCompleteListener(RegisterActivity.this, task -> {
+                        // If we get ok to connect to Firebase authentication, we'll move from LoginActivity to MainMenuActivity
                         if (task.isSuccessful()) {
                             Log.i(TAG, "createUserWithEmail:success");
+
                             startActivity(new Intent(RegisterActivity.this, MainMenuActivity.class));
                             finish();
+                            // If we not get ok to connect to Firebase authentication, we'll pop Toast
                         } else {
                             Log.e(TAG, "createUserWithEmail:failure", task.getException());
+
                             Toast.makeText(RegisterActivity.this, "The register failed", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
     }
 
+    // Perform executes when elements are clicked
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvLogin:
-                onBackPressed();
+                onBackPressed(); // Back to the previous Activity
                 break;
             case R.id.btnRegister:
                 register();
