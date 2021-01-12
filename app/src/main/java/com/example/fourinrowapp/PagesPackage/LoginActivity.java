@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                // Destroy the current Activity
                 finish();
             }
         };
@@ -76,20 +77,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // Pop error on the EditText
             etEmail.setError("The email is invalid");
             etPassword.setError("The password is invalid");
-            // Navigate to the EditText with the error
+            // Emphasize the EditText with the error
             etEmail.requestFocus();
             etPassword.requestFocus();
             // Check if the email is invalid
         } else if (!EmailPasswordValidator.getInstance().isValidEmail(email)) {
             // Pop error on the EditText
             etEmail.setError("The email is invalid");
-            // Navigate to the EditText with the error
+            // Emphasize the EditText with the error
             etEmail.requestFocus();
             // Check if the password is invalid
         } else if (!EmailPasswordValidator.getInstance().isValidPassword(password)) {
             // Pop error on the EditText
             etPassword.setError("The password is invalid");
-            // Check if the password is invalid
+            // Emphasize the EditText with the error
             etPassword.requestFocus();
             // If the email and password are valid we are get in to the executes in the else
         } else {
@@ -102,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.i(TAG, "signInWithEmail:success");
 
                             startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                            // Destroy the current Activity
                             finish();
                             // If we not get ok to connect to Firebase authentication, we'll pop Toast
                         } else {
