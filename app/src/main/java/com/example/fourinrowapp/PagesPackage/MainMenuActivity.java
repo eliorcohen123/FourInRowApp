@@ -58,6 +58,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 mAuth.signOut(); // SignOut from Firebase Auth
 
                 startActivity(new Intent(MainMenuActivity.this, LoginActivity.class));
+                // Destroy the current Activity
                 finish();
             }
         });

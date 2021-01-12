@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
+            // Destroy the current Activity
             finish();
         }, 2000);
     }
