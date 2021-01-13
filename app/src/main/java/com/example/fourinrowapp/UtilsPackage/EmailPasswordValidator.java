@@ -37,7 +37,7 @@ public class EmailPasswordValidator {
     private static Matcher matcher; // Set Matcher
 
     // Check if the email is valid according to the patten we defined
-    public boolean isValidEmail(final String email) {
+    public boolean isValidEmail(String email) {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
 
@@ -45,7 +45,7 @@ public class EmailPasswordValidator {
     }
 
     // Check if the password is valid according to the patten we defined
-    public boolean isValidPassword(final String password) {
+    public boolean isValidPassword(String password) {
         if (password.length() < 8) {
             return false;
         } else {
