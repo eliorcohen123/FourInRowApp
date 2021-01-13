@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance(); // Initialize FirebaseAuth
 
-        // Check if the user login before to the Firebase(and not sign out), if login before - intent Activity from LoginActivity to MainMenuActivity
+        // Check if the user login before to the Firebase(and not sign out), if logged in before - intent Activity from LoginActivity to MainMenuActivity
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
