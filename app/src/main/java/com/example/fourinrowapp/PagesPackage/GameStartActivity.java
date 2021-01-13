@@ -16,14 +16,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.fourinrowapp.UtilsPackage.GameMain;
 import com.example.fourinrowapp.R;
-import com.example.fourinrowapp.DataPackage.TypeDBHelper;
+import com.example.fourinrowapp.DataPackage.TypeDBOpenHelper;
 
 public class GameStartActivity extends AppCompatActivity {
 
     private static final Paint background = new Paint();
     private static final Paint linesColor = new Paint();
     private static final Paint foreground = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private TypeDBHelper typeDBHelper;
+    private TypeDBOpenHelper typeDBOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class GameStartActivity extends AppCompatActivity {
         public GraphicsView(Context context) {
             super(context);
 
-            typeDBHelper = new TypeDBHelper(context);
+            typeDBOpenHelper = new TypeDBOpenHelper(context);
         }
 
         protected void onDraw(Canvas canvas) {
@@ -99,7 +99,7 @@ public class GameStartActivity extends AppCompatActivity {
                             }
 
                             if (j == 6) {
-                                typeDBHelper.addType(result);
+                                typeDBOpenHelper.addType(result);
                             }
 
                             Toast.makeText(getContext(), result + " won the game", Toast.LENGTH_SHORT).show();

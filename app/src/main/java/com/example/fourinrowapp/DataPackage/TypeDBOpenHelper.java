@@ -11,13 +11,13 @@ import android.util.Log;
 import java.util.ArrayList;
 
 // SQLiteOpenHelper - a helper class to manage database creation
-public class TypeDBHelper extends SQLiteOpenHelper {
+public class TypeDBOpenHelper extends SQLiteOpenHelper {
 
     private static final String FourInRow_TABLE_NAME = "FourInRow"; // Set the TABLE name
     private static final String FourInRow_ID = "ID"; // Set the ID of the TABLE
     private static final String FourInRow_TYPE = "TYPE"; // Set the String that will contain data below
 
-    public TypeDBHelper(Context context) {
+    public TypeDBOpenHelper(Context context) {
         super(context, FourInRow_TABLE_NAME, null, 1);
     }
 

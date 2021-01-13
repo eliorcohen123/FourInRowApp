@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.example.fourinrowapp.AdapterPackage.AdapterType;
 import com.example.fourinrowapp.R;
-import com.example.fourinrowapp.DataPackage.TypeDBHelper;
+import com.example.fourinrowapp.DataPackage.TypeDBOpenHelper;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class ScoresActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView; // Set RecyclerView - contains list of items
-    private final ArrayList<String> resultsArrayList = new ArrayList<>();
+    private final ArrayList<String> typesArrayList = new ArrayList<>();
     private AdapterType adapterType; // Set AdapterType
-    private TypeDBHelper typeDBHelper; // Set TypeDBHelper - SQLiteDBOpenHelper
+    private TypeDBOpenHelper typeDBOpenHelper; // Set TypeDBHelper - SQLiteDBOpenHelper
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
@@ -34,9 +34,9 @@ public class ScoresActivity extends AppCompatActivity {
         // Initialize id to the element
         recyclerView = findViewById(R.id.recyclerView);
 
-        typeDBHelper = new TypeDBHelper(this); // Initialize TypeDBHelper - SQLiteDBOpenHelper
+        typeDBOpenHelper = new TypeDBOpenHelper(this); // Initialize TypeDBHelper - SQLiteDBOpenHelper
 
-        adapterType = new AdapterType(resultsArrayList); // Initialize AdapterType - adapts the design to each item in the RecyclerView and receives data
+        adapterType = new AdapterType(typesArrayList); // Initialize AdapterType - adapts the design to each item in the RecyclerView and receives data
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Set the layout of the contents
         recyclerView.setAdapter(adapterType); // Set the adapter in the RecyclerView
     }
@@ -46,8 +46,8 @@ public class ScoresActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) { // Perform tasks in background
-                resultsArrayList.clear(); // Clear the ArrayList that contains the data of the RecyclerView
-                resultsArrayList.addAll(typeDBHelper.getAllTypes()); // Add all the data from TypeDBHelper - SQLiteDBOpenHelper, to the ArrayList that data of the RecyclerView
+                typesArrayList.clear(); // Clear the ArrayList that contains the data of the RecyclerView
+                typesArrayList.addAll(typeDBOpenHelper.getAllTypes()); // Add all the data from TypeDBHelper - SQLiteDBOpenHelper, to the ArrayList that data of the RecyclerView
                 return null;
             }
 
