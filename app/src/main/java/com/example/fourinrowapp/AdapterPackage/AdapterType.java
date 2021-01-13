@@ -14,7 +14,7 @@ import java.util.List;
 // A class that extends ViewHolder that will be used by the adapter
 public class AdapterType extends RecyclerView.Adapter<ViewHolderAdapterType> {
 
-    private List<String> dataList; // List of Strings
+    private final List<String> dataList; // List of Strings
 
     public AdapterType(List<String> dataList) {
         this.dataList = dataList;
