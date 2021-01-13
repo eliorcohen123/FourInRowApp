@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TypeDBOpenHelper extends SQLiteOpenHelper {
 
     private static final String FourInRow_TABLE_NAME = "FourInRow"; // Set the TABLE name
-    private static final String FourInRow_ID = "ID"; // Set the ID of the TABLE
+    private static final String FourInRow_ID = "ID"; // Set the ID of element in the TABLE
     private static final String FourInRow_TYPE = "TYPE"; // Set the String that will contain data below
 
     public TypeDBOpenHelper(Context context) {
