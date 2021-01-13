@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fourinrowapp.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 // A class that extends ViewHolder that will be used by the adapter
 public class AdapterType extends RecyclerView.Adapter<ViewHolderAdapterType> {
 
-    private final List<String> dataList; // List of Strings
+    private final ArrayList<String> dataList; // List of Strings
 
-    public AdapterType(List<String> dataList) {
+    public AdapterType(ArrayList<String> dataList) {
         this.dataList = dataList;
     }
 
@@ -31,7 +31,7 @@ public class AdapterType extends RecyclerView.Adapter<ViewHolderAdapterType> {
 
     // Display the data at the specified position
     @Override
-    public void onBindViewHolder(ViewHolderAdapterType holder, final int position) {
+    public void onBindViewHolder(ViewHolderAdapterType holder, int position) {
         String current = dataList.get(position); // Put the data by the position
         holder.win.setText(current);
         if (current.equals("X")) {
