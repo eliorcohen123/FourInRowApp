@@ -1,12 +1,12 @@
 package com.example.fourinrowapp.UtilsPackage;
 
-public class GameMain {
+public class GameMainHuman {
 
     public String[][] board = new String[7][7];
     public int[][] pos = new int[4][2];
     public int gameEnd = 0;
 
-    public GameMain() {
+    public GameMainHuman() {
         int i, j;
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 7; j++) {

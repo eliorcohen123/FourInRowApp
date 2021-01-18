@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PagesPackage.MainMenuActivity" />
-        <activity android:name=".PagesPackage.GameStartActivity" />
+        <activity android:name=".PagesPackage.GameStartHumanActivity" />
+        <activity android:name=".PagesPackage.GameStartComputerActivity" />
         <activity android:name=".PagesPackage.ScoresActivity" />
         <activity android:name=".PagesPackage.LoginActivity" />
         <activity android:name=".PagesPackage.RegisterActivity" />

@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">FourInRowApp</string>
     <string name="menu">MAIN MENU</string>
-    <string name="play">PLAY GAME</string>
+    <string name="play_human">PLAY GAME - HUMAN</string>
+    <string name="play_computer">PLAY GAME - COMPUTER</string>
     <string name="scores">SCORES</string>
     <string name="sign_out">SIGN OUT</string>
+    <string name="menu.reset">"Reset achievements"</string>
+    <string name="query.reset">"Are you Serious?"</string>
+    <string name="title.level">"Level"</string>
+    <string name="msg.turn">"Your turn!\nTap column to drop your stone"</string>
+    <string name="msg.won">"You have won!\nTap here to start a new game"</string>
+    <string name="msg.lost">"You have lost!\nTap here to start a new game"</string>
+    <string name="msg.draw">"It's a draw!\nTap here to start a new game"</string>
+    <string name="msg.welcome">"Welcome!\nTap here to start a new game"</string>
+    <string name="msg.error">"Error!\nTap here to start a new game"</string>
 </resources>

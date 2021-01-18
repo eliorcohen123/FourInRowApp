@@ -18,4 +18,11 @@
     <color name="colourWin">#ff0000</color>
     <color name="colorLime">#00FF00</color>
     <color name="colorWhiteTransparent">#CCFFFFFF</color>
+    <color name="background2">#aaaaaa</color>
+    <color name="foreground">#000000</color>
+    <color name="panel">#ffffff</color>
+    <color name="space">#eeeeee</color>
+    <color name="frame">#99926b</color>
+    <color name="m">#666699</color>
+    <color name="f">#996666</color>
 </resources>

@@ -36,7 +36,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private void listViewMainMenu() {
         // Array of Strings that contain Strings to show in the ListView
         String[] items = {
-                getResources().getString(R.string.play),
+                getResources().getString(R.string.play_human),
+                getResources().getString(R.string.play_computer),
                 getResources().getString(R.string.scores),
                 getResources().getString(R.string.sign_out),
         };
@@ -50,8 +51,10 @@ public class MainMenuActivity extends AppCompatActivity {
         menuList.setOnItemClickListener((parent, itemClicked, position, id) -> {
             TextView textview = (TextView) itemClicked;
             String strText = textview.getText().toString();
-            if (strText.equalsIgnoreCase(getResources().getString(R.string.play))) {
-                startActivity(new Intent(MainMenuActivity.this, GameStartActivity.class));
+            if (strText.equalsIgnoreCase(getResources().getString(R.string.play_human))) {
+                startActivity(new Intent(MainMenuActivity.this, GameStartHumanActivity.class));
+            } else if (strText.equalsIgnoreCase(getResources().getString(R.string.play_computer))) {
+                startActivity(new Intent(MainMenuActivity.this, GameStartComputerActivity.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(R.string.scores))) {
                 startActivity(new Intent(MainMenuActivity.this, ScoresActivity.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(R.string.sign_out))) {
