@@ -41,7 +41,6 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
     private TextView messageView;
     private View busyIndicator;
     private View playingField;
-    private View levelUpNotificationView;
     private final ImageView[][] images = new ImageView[7][7];
 
     private final Drawable[] drawables = new Drawable[3];
@@ -65,7 +64,6 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
         messageView = findViewById(R.id.message);
         busyIndicator = findViewById(R.id.busy);
         playingField = findViewById(R.id.playingField);
-        levelUpNotificationView = findViewById(R.id.levelUpNotification);
         ViewGroup box = findViewById(R.id.box);
         for (int row = 0; row < 7; row++) {
             ViewGroup rowView = (ViewGroup) box.getChildAt(6 - row);
@@ -133,8 +131,6 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
                     mpWon.start();
                 else {
                     (gameMainComputer.maxLevel % 2 == 0 ? mpLevelUp0 : mpLevelUp1).start();
-                    levelUpNotificationView.setVisibility(View.VISIBLE);
-                    levelUpNotificationView.setAnimation(getGrowAnimation());
                     playingField.setAnimation(getFadeOutAnimation());
                 }
                 break;
@@ -184,7 +180,6 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
         public void onAnimationEnd(Animation animation) {
             gameMainComputer.maxLevel = 1;
             invalidateOptionsMenu();
-            levelUpNotificationView.setVisibility(View.GONE);
         }
 
         @Override

@@ -64,5 +64,4 @@
             tools:src="@drawable/cross"
             tools:tint="@color/m" />
     </LinearLayout>
-
 </merge>
