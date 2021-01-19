@@ -19,7 +19,7 @@ public class ScoresActivity extends AppCompatActivity {
     private RecyclerView recyclerView; // Set RecyclerView - contains list of items
     private final ArrayList<String> typesArrayList = new ArrayList<>();
     private AdapterType adapterType; // Set AdapterType
-    private TypeDBOpenHelper typeDBOpenHelper; // Set TypeDBHelper - SQLiteDBOpenHelper
+    private TypeDBOpenHelper typeDBOpenHelper; // Set TypeDBOpenHelper - SQLiteDBOpenHelper
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
@@ -34,7 +34,7 @@ public class ScoresActivity extends AppCompatActivity {
         // Initialize id to the element
         recyclerView = findViewById(R.id.recyclerView);
 
-        typeDBOpenHelper = new TypeDBOpenHelper(this); // Initialize TypeDBHelper - SQLiteDBOpenHelper
+        typeDBOpenHelper = new TypeDBOpenHelper(this); // Initialize TypeDBOpenHelper - SQLiteDBOpenHelper
 
         adapterType = new AdapterType(typesArrayList); // Initialize AdapterType - adapts the design to each item in the RecyclerView and receives data
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Set the layout of the contents
@@ -47,7 +47,7 @@ public class ScoresActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) { // Perform tasks in background
                 typesArrayList.clear(); // Clear the ArrayList that contains the data of the RecyclerView
-                typesArrayList.addAll(typeDBOpenHelper.getAllTypes()); // Add all the data from TypeDBHelper - SQLiteDBOpenHelper, to the ArrayList that data of the RecyclerView
+                typesArrayList.addAll(typeDBOpenHelper.getAllTypes()); // Add all the data from TypeDBOpenHelper - SQLiteDBOpenHelper, to the ArrayList that data of the RecyclerView
                 return null;
             }
 
