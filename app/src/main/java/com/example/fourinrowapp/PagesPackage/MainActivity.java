@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fourinrowapp.R;
 
-// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
 public class MainActivity extends AppCompatActivity {
 
     @Override

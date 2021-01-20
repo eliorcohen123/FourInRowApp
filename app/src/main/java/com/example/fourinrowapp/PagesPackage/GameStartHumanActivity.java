@@ -18,7 +18,7 @@ import com.example.fourinrowapp.UtilsPackage.GameMainHuman;
 import com.example.fourinrowapp.R;
 import com.example.fourinrowapp.DataPackage.TypeDBOpenHelper;
 
-// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
 public class GameStartHumanActivity extends AppCompatActivity {
 
     private static final Paint background = new Paint(); // Set Paint of background - paint light blue color on the background of the screen
@@ -63,12 +63,11 @@ public class GameStartHumanActivity extends AppCompatActivity {
 
             // Draw the blue lines on the screen 7 height and width lines
             for (i = 1; i <= 7; i++) {
+                // Create width of x
                 canvas.drawLine(i * width, 0, i * width, getHeight(), linesColor);
                 canvas.drawLine((i * width) + 1, 0, (i * width) + 1, getHeight(), linesColor);
                 canvas.drawLine((i * width) + 2, 0, (i * width) + 2, getHeight(), linesColor);
-            }
-
-            for (i = 1; i <= 7; i++) {
+                // Create width of y
                 canvas.drawLine(0, i * height, getHeight(), i * height, linesColor);
                 canvas.drawLine(0, (i * height) + 1, getHeight(), (i * height) + 1, linesColor);
                 canvas.drawLine(0, (i * height) + 2, getHeight(), (i * height) + 2, linesColor);
@@ -76,7 +75,7 @@ public class GameStartHumanActivity extends AppCompatActivity {
 
             // Check if the game is start
             if (touchStartFlag == 1) {
-                String result = game.gameEndCheck(y, x, print); // Return String of the shape winner(X or O)
+                String result = game.gameEndCheck(y, x, print); // Returns String of the shape winner(X or O)
                 foreground.setStyle(Style.FILL); // Fill the shape(X or O)
                 foreground.setTextSize(height * 0.75f); // Multiplier the size of the shape(X or O) with 0.75
                 foreground.setTextScaleX(width / height); // Divide the scale to the shape(X or O) with width / height
@@ -88,16 +87,19 @@ public class GameStartHumanActivity extends AppCompatActivity {
                 for (i = 0; i < 7; i++) {
                     for (j = 0; j < 7; j++) {
                         a:
-                        if (game.gameEnd == 1) { // Check if the turn is end
+                        if (game.gameEnd == 1) { // Check if the game is end
                             for (k = 0; k < 4; k++) {
+                                // Check if X or O is next to the other of the same kind
                                 if (game.pos[k][0] == i && game.pos[k][1] == j) {
                                     count2++; // Add count that check if X or Y wins
                                     break a;
+                                    // Check if X or O is not next to the other of the same kind
                                 } else {
                                     foreground.setColor(getResources().getColor(R.color.text_color)); // Set blue color to the shapes(X and O)
                                 }
                             }
                             canvas.drawText(game.board[i][j], j * width + x1, i * height + y1, foreground); // Draw the shapes(X or/and O)
+                            // Check if the game is not end
                         } else {
                             foreground.setColor(ContextCompat.getColor(GameStartHumanActivity.this, R.color.text_color)); // Set blue color to the shapes(X or O)
                             canvas.drawText(game.board[i][j], j * width + x1, i * height + y1, foreground); // Draw the shapes(X or/and O)
@@ -124,29 +126,37 @@ public class GameStartHumanActivity extends AppCompatActivity {
             // Check if the user touch(like click, it's down on the screen) on the screen - ACTION_DOWN
             if (event.getAction() != MotionEvent.ACTION_DOWN)
                 return super.onTouchEvent(event);
+            // Check if the game is not end
             if (game.gameEnd != 1) {
-                x = (int) (event.getX() / width);
-                y = (int) (event.getY() / height);
-                float tempX = (event.getX() / width);
-                float tempY = (event.getY() / height);
-                touchStartFlag = 1;
-                String TAG = "check1";
-                Log.d(TAG, "Touched " + x + "," + y);
-                Log.d(TAG, "Touched " + tempX + "," + tempY);
+                x = (int) (event.getX() / width); // int x equals x click on the screen / width
+                y = (int) (event.getY() / height); // int y equals y click on the screen / height
+                float tempX = (event.getX() / width); // float x equals x click on the screen / width
+                float tempY = (event.getY() / height); // float y equals y click on the screen / height
+                touchStartFlag = 1; // The game is start if touchStartFlag is 1
+                String TAG = "check1"; // String to get data in LogCat
+                Log.i(TAG, "Touched " + x + "," + y); // Show the position that clicked on the screen in int
+                Log.i(TAG, "Touched " + tempX + "," + tempY); // Show the position that clicked on the screen in float
+                // Check if print X or O on the screen
                 if (count % 2 != 0) {
                     print = "X";
                 } else {
                     print = "O";
                 }
                 count++;
+                // Check if the user don't touch on the air in the game
                 if (game.isInTheAir(x, y) == 0) {
+                    // Check if the user don't touch on square with X or O
                     if (game.isAlreadyFilled(x, y) == 0) {
+                        // Input the data of x, y and print
                         game.inputData(x, y, print);
+                        // Draw on the screen
                         invalidate();
+                        // if the user touch on square with X or O
                     } else {
                         Toast.makeText(getContext(), "Already selected box", Toast.LENGTH_SHORT).show();
                         count--;
                     }
+                    // if the user touch on the air in the game
                 } else {
                     Toast.makeText(getContext(), "In the air", Toast.LENGTH_SHORT).show();
                     count--;

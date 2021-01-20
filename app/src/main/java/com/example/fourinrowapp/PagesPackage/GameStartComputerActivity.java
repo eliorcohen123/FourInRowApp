@@ -14,7 +14,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -171,40 +170,10 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
         return fadeOutAnimation;
     }
 
-    private final Animation.AnimationListener growAnimationListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            gameMainComputer.maxLevel = 1;
-            invalidateOptionsMenu();
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
-    };
-
-    private Animation getGrowAnimation() {
-        AlphaAnimation fadeInAnimation = new AlphaAnimation(0f, 1f);
-        fadeInAnimation.setDuration(4000);
-        fadeInAnimation.setRepeatMode(Animation.REVERSE);
-        fadeInAnimation.setRepeatCount(1);
-        ScaleAnimation growAnimation = new ScaleAnimation(0f, 1.8f, 0f, 1.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        growAnimation.setDuration(8000);
-        growAnimation.setInterpolator(new AccelerateInterpolator(8f));
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(fadeInAnimation);
-        animationSet.addAnimation(growAnimation);
-        animationSet.setAnimationListener(growAnimationListener);
-        return animationSet;
-    }
-
     private final Animation.AnimationListener fallAnimationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
+
         }
 
         @Override
@@ -221,6 +190,7 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
 
         @Override
         public void onAnimationRepeat(Animation animation) {
+
         }
     };
 

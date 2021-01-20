@@ -2,10 +2,11 @@ package com.example.fourinrowapp.UtilsPackage;
 
 public class GameMainHuman {
 
-    public String[][] board = new String[7][7];
-    public int[][] pos = new int[4][2];
-    public int gameEnd = 0;
+    public String[][] board = new String[7][7]; // Set String array of board
+    public int[][] pos = new int[4][2]; // Set String array of pos
+    public int gameEnd = 0; // Set int val that check if the game is end
 
+    // Constructor of GameMainHuman that initialize board val to ""
     public GameMainHuman() {
         int i, j;
         for (i = 0; i < 7; i++) {
@@ -15,10 +16,12 @@ public class GameMainHuman {
         }
     }
 
+    // Input data to board
     public void inputData(int x, int y, String str) {
         board[y][x] = str;
     }
 
+    // Method that check if the user touch on square with X or O
     public int isAlreadyFilled(int x, int y) {
         if (x != y) {
             if (board[y][x].equals("X") || board[y][x].equals("O")) {
@@ -32,6 +35,7 @@ public class GameMainHuman {
         return 0;
     }
 
+    // Method that check if the user don't touch on the air in the game
     public int isInTheAir(int x, int y) {
         int downX;
         downX = ++y;
@@ -47,6 +51,7 @@ public class GameMainHuman {
         return 0;
     }
 
+    // Method that check if the game is end
     public String gameEndCheck(int x, int y, String str) {
         if (isOutOfBound(x - 1, y - 1) == 0 && board[x - 1][y - 1].equals(str)) {
             if (isOutOfBound(x - 2, y - 2) == 0 && board[x - 2][y - 2].equals(str)) {
@@ -236,6 +241,7 @@ public class GameMainHuman {
         return null;
     }
 
+    // Method that check if the user touch out of bound of the board game
     public int isOutOfBound(int x, int y) {
         if (x >= 7 || x < 0 || y >= 7 || y < 0) {
             return 1;

@@ -15,7 +15,7 @@ import com.example.fourinrowapp.R;
 import com.example.fourinrowapp.UtilsPackage.EmailPasswordValidator;
 import com.google.firebase.auth.FirebaseAuth;
 
-// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
 // View.OnClickListener - Give you access to use the function - onClick() - Order the clicks on elements
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

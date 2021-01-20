@@ -13,7 +13,7 @@ import com.example.fourinrowapp.DataPackage.TypeDBOpenHelper;
 
 import java.util.ArrayList;
 
-// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
 public class ScoresActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView; // Set RecyclerView - contains list of items

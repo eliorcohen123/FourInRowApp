@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fourinrowapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-// AppCompatActivity - Give you access to use the LifeCycle of Activity.
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
 public class MainMenuActivity extends AppCompatActivity {
 
     private ListView menuList; // View which groups several items and displays them in a vertically scrollable list
