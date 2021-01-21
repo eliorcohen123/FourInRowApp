@@ -28,66 +28,80 @@ import com.example.fourinrowapp.UtilsPackage.GameMainComputer;
 
 import java.util.LinkedList;
 
+// AppCompatActivity - Give you access to use the LifeCycle of Activity
+// Runnable - Used to create a thread
 public class GameStartComputerActivity extends AppCompatActivity implements Runnable {
 
-    private final GameMainComputer gameMainComputer = new GameMainComputer();
+    private final GameMainComputer gameMainComputer = new GameMainComputer(); // Initialize GameMainComputer
 
-    private byte gameState;
-    private byte color;
-    private byte computerPlayer;
-    private boolean playBelowAchievementLevel;
-
-    private TextView messageView;
-    private View busyIndicator;
-    private View playingField;
-    private final ImageView[][] images = new ImageView[7][7];
-
-    private final Drawable[] drawables = new Drawable[3];
-    private final int[] colors = new int[3];
-
-    private ValueAnimator winAnimation;
-
+    private byte gameState; // Set gameState - check if the game is start
+    private byte color; // Set color - the color of us
+    private byte computerPlayer; // Set computerPlayer - the color of the computer
+    private boolean playBelowAchievementLevel; // Set playBelowAchievementLevel - check if the level game is below the achievement level
+    private TextView messageView; // Set messageView - TextView that show message
+    private View busyIndicator; // Set busyIndicator - ProgressBar that showing when the computer playing
+    private View playingField; // Set playingField - RelativeLayout that surround the board of the game
+    private final ImageView[][] images = new ImageView[7][7]; // Set images - the squares of the board
+    private final Drawable[] drawables = new Drawable[3]; // Set drawables - the images of X or O
+    private final int[] colors = new int[3]; // Set colors - the colors of X or O
+    private ValueAnimator winAnimation; // Set winAnimation - do animation when we win in the game
+    // Initialize displayMetrics - A structure describing general information about a display, such as its size, density, and font scaling
     private final DisplayMetrics displayMetrics = new DisplayMetrics();
-
-    private MediaPlayer mpWon;
-    private MediaPlayer mpLost;
-    private MediaPlayer mpLevelUp0;
-    private MediaPlayer mpLevelUp1;
+    private MediaPlayer mpWon; // Set mpWon - playing song when we win in the game
+    private MediaPlayer mpLost; // Set mpLost - playing song when we lose in the game
+    private MediaPlayer mpLevelUp0; // Set mpLevelUp0 - playing song when we not rise level
+    private MediaPlayer mpLevelUp1; // Set mpLevelUp1 - playing song when we rise level
+    private ViewGroup box; // Set ViewGroup - show the board
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // onCreate - Called when Activity is first created
         super.onCreate(savedInstanceState);
         ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
-        setContentView(R.layout.game);
+        setContentView(R.layout.activity_game_start_computer); // Give you to see the design of your Activity, Give you access to use the ids of the elements
 
-        messageView = findViewById(R.id.message);
-        busyIndicator = findViewById(R.id.busy);
-        playingField = findViewById(R.id.playingField);
-        ViewGroup box = findViewById(R.id.box);
+        initUI();
+
+        // Create the squares of the board
         for (int row = 0; row < 7; row++) {
             ViewGroup rowView = (ViewGroup) box.getChildAt(6 - row);
             for (int column = 0; column < 7; column++)
                 images[row][column] = (ImageView) rowView.getChildAt(column);
         }
+
+        // Initialize the images of X and Y to us and to the computer
         drawables[GameMainComputer.WHITE] = ContextCompat.getDrawable(this, R.drawable.naught);
         drawables[GameMainComputer.BLACK] = ContextCompat.getDrawable(this, R.drawable.cross);
+
+        // Initialize the colors of X and Y to us and to the computer
         colors[GameMainComputer.WHITE] = ContextCompat.getColor(this, R.color.f);
         colors[GameMainComputer.BLACK] = ContextCompat.getColor(this, R.color.m);
-        winAnimation = ValueAnimator.ofFloat(1F, 0F);
-        winAnimation.setDuration(500);
-        winAnimation.setRepeatMode(ValueAnimator.REVERSE);
-        winAnimation.setRepeatCount(ValueAnimator.INFINITE);
-        mpWon = MediaPlayer.create(this, R.raw.won);
-        mpLost = MediaPlayer.create(this, R.raw.lost);
-        mpLevelUp0 = MediaPlayer.create(this, R.raw.level_up_0);
-        mpLevelUp1 = MediaPlayer.create(this, R.raw.level_up_1);
 
-        gameState = 4;
-        color = GameMainComputer.WHITE;
-        computerPlayer = GameMainComputer.BLACK;
+        winAnimation = ValueAnimator.ofFloat(1F, 0F); // Start the animation at full opacity to empty opacity
+        winAnimation.setDuration(500); // Set the duration of the animation to 0.5 second
+        winAnimation.setRepeatMode(ValueAnimator.REVERSE); // Set the repeat of the animation to reverse mode
+        winAnimation.setRepeatCount(ValueAnimator.INFINITE); // Set the repeat of the animation infinity times
+
+        mpWon = MediaPlayer.create(this, R.raw.won); // Initialize mpWon - playing song when we win in the game
+        mpLost = MediaPlayer.create(this, R.raw.lost); // Initialize mpLost - playing song when we lose in the game
+        mpLevelUp0 = MediaPlayer.create(this, R.raw.level_up_0); // Initialize mpLevelUp0 - playing song when we not rise level
+        mpLevelUp1 = MediaPlayer.create(this, R.raw.level_up_1); // Initialize mpLevelUp1 - playing song when we rise level
+
+        gameState = 4; // Start the game
+        color = GameMainComputer.WHITE; // Set the color of us to white
+        computerPlayer = GameMainComputer.BLACK; // Set the color of the computer to black
+
         setMessage();
     }
 
+    private void initUI() {
+        // Initialize id to the element
+        messageView = findViewById(R.id.message);
+        busyIndicator = findViewById(R.id.busy);
+        playingField = findViewById(R.id.playingField);
+        box = findViewById(R.id.box);
+    }
+
+    // List of Strings that contains messages
     private static final int[] messageText = {
             R.string.msg_turn,
             R.string.msg_won,
@@ -96,7 +110,6 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
             R.string.msg_welcome
     };
 
-    @SuppressLint("SetTextI18n")
     private void setMessage() {
         if (gameState == GameMainComputer.RUNNING && color == computerPlayer) {
             messageView.setVisibility(View.INVISIBLE);

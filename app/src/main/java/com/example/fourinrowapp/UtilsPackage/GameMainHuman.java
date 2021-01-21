@@ -242,7 +242,7 @@ public class GameMainHuman {
     }
 
     // Method that check if the user touch out of bound of the board game
-    public int isOutOfBound(int x, int y) {
+    private int isOutOfBound(int x, int y) {
         if (x >= 7 || x < 0 || y >= 7 || y < 0) {
             return 1;
         }
