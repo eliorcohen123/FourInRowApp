@@ -221,10 +221,10 @@ public class GameMainComputer {
         int base = index(row, column);
         int valueWhite = value(WHITE, base);
         int valueBlack = value(BLACK, base);
-        // Check if valueWhite more than and equals to VAL3 and lowestWhite[column] small from 0
+        // Check if valueWhite big from and equals to VAL3 and lowestWhite[column] small from 0
         if (valueWhite >= VAL3 && lowestWhite[column] < 0)
             lowestWhite[column] = row; // Set lowestWhite[column] to row
-        // Check if valueBlack more than and equals to VAL3 and lowestBlack[column] small from 0
+        // Check if valueBlack big from and equals to VAL3 and lowestBlack[column] small from 0
         if (valueBlack >= VAL3 && lowestBlack[column] < 0)
             lowestBlack[column] = row; // Set lowestBlack[column] to row
         return valueWhite - valueBlack;
@@ -261,7 +261,7 @@ public class GameMainComputer {
             // Check if t small than ROWS
             if (t < ROWS) { // legal move
                 byte lowest = lowestOwn[c];
-                // Check if lowest more than and equals from 0
+                // Check if lowest big from and equals from 0
                 if (lowest >= 0) {
                     // Check if lowest equals to t
                     if (lowest == t) {
@@ -270,7 +270,7 @@ public class GameMainComputer {
                         ratings[c] |= 0x200;
                 }
                 lowest = lowestOther[c];
-                // Check if lowest more than and equals from 0
+                // Check if lowest big from and equals from 0
                 if (lowest >= 0)
                     ratings[c] |= lowest == t ? 0x1000 : 0x100;
             } else // Illegal move
@@ -280,42 +280,51 @@ public class GameMainComputer {
         int highestRating = ratings[COLUMNS - 1];
         byte column = (byte) (highestRating & 0xF);
         // Exit if draw
-        // Check if occupied more than and equals to ROWS multiplication COLUMNS
+        // Check if occupied big from and equals to ROWS multiplication COLUMNS
         if (occupied >= ROWS * COLUMNS) {
             return column;
         }
         // Exit if maximum level reached and no quiescence search required
-        // Check if level more than maxLevel and highestRating small from 0x1000
+        // Check if level big from maxLevel and highestRating small from 0x1000
         if (level > maxLevel && highestRating < 0x1000) {
             return value | column;
         }
         // Go through all legal moves in the sorted list
         byte bestColumn = 0xF;
-        int bestValue = color == WHITE ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int bestValue = color == WHITE ? Integer.MIN_VALUE : Integer.MAX_VALUE; // Set bestValue - check if color equals to WHITE - 1, if yes - Integer.MIN_VALUE, if no - Integer.MAX_VALUE
+        // Run on all the COLUMNS - 1, reverse
         for (byte i = COLUMNS - 1; i >= 0; i--) { // from highest to lowest rating
             int rating = ratings[i];
+            // Check if rating small from 0
             if (rating < 0) // Legal moves exhausted
                 break;
+            // Check if level small from and equals to maxLevel or check if rating big from and equals to 0x1000
             if (level <= maxLevel || rating >= 0x1000) { // Normal search or quiescence search
                 column = (byte) (rating & 0xF);
                 drop(column, color);
                 value = search(opposite(color), alpha, beta, (byte) (level + 1)) & 0xFFFFFFF0;
                 revert(column);
+                // Check if color equals to WHITE - 1
                 if (color == WHITE) {
+                    // Check if value big than bestValue
                     if (value > bestValue) {
                         bestValue = value;
                         bestColumn = column;
                     }
+                    // Check if value big than alpha
                     if (value > alpha)
                         alpha = value;
                 } else {
+                    // Check if value small than bestValue
                     if (value < bestValue) {
                         bestValue = value;
                         bestColumn = column;
                     }
+                    // Check if value small than beta
                     if (value < beta)
                         beta = value;
                 }
+                // Check if alpha big than and equals to beta
                 if (alpha >= beta) {
                     break;
                 }

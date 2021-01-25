@@ -32,7 +32,6 @@ import java.util.LinkedList;
 public class GameStartComputerActivity extends AppCompatActivity implements Runnable {
 
     private final GameMainComputer gameMainComputer = new GameMainComputer(); // Initialize GameMainComputer
-
     private byte gameState; // Set gameState - check if the game is start
     private byte color; // Set color - the color of us
     private byte computerPlayer; // Set computerPlayer - the color of the computer
@@ -319,14 +318,14 @@ public class GameStartComputerActivity extends AppCompatActivity implements Runn
         gameState = GameMainComputer.RUNNING; // Set gameState to 0
         color = GameMainComputer.WHITE; // Set color to white/0
         clearBoard();
-        playBelowAchievementLevel = gameMainComputer.maxLevel < 1; // Set playBelowAchievementLevel to true if gameMainComputer.maxLevel is small from 1
+        playBelowAchievementLevel = gameMainComputer.maxLevel < 1; // Set playBelowAchievementLevel to true if gameMainComputer.maxLevel is small from 1 or false if equals or big from 1
         // Check if color equals to computerPlayer
         if (color == computerPlayer)
             new SearchTask().execute(); // Run the AsyncTASK 'SearchTask'
     }
 
     public void click(View v) {
-        // Check if gameState more than 0
+        // Check if gameState big from 0
         if (gameState > GameMainComputer.RUNNING) {
             startGame();
             setMessage();
